@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: naimcheniounigomez <naimcheniounigomez@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:19:51 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/03/27 16:24:22 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:00:10 by naimcheniou      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,23 @@ void	ft_exit(void)
 {
 	ft_errors();
 	exit (0);
+}
+
+void	ft_openfd_infile(int *fd, char *cmd1)
+{
+	int miau;
+	
+	miau = open("infile", O_RDONLY);
+	if (miau == -1)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		ft_exit();
+	}
+	dup2(miau, STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[0]);
+	close(fd[1]);
+	close(miau);
+	access(cmd1, F_OK | X_OK);
 }
