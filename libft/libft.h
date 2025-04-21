@@ -17,7 +17,9 @@
 # include <strings.h>
 # include <string.h>
 # include <stdlib.h>
+# include <stdio.h>
 
+void			ft_error(void);
 int				ft_putchar(int c);
 int				ft_putstr(char *s);
 size_t			ft_strlen(const char *str);
@@ -32,6 +34,7 @@ int				ft_isprint(int c);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+int				ft_strcmp(char *s1, char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char			*ft_strdup(const char *s1);

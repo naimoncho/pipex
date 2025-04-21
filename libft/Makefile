@@ -38,6 +38,8 @@ SRCS =	ft_isalpha.c \
 		ft_putstr.c \
 		ft_putchar.c \
 		ft_free_all.c \
+		ft_error.c \
+		ft_strcmp.c \
 
 OBJS = $(SRCS:.c=.o)
 BONUS = ft_lstadd_back_bonus.c \
