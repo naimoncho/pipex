@@ -6,7 +6,7 @@
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:20:07 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/04/21 13:20:08 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/04/21 15:18:46 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main(int argc, char **av, char **env)
 {
 	int		process_fd[2];
 	pid_t	pids;
+	int		status;
 
 	if (argc != 5)
 	{
@@ -81,19 +82,16 @@ int	main(int argc, char **av, char **env)
 		exit(EXIT_FAILURE);
 	}
 	if (pipe(process_fd) == -1)
-	{
-		perror("pipex: pipe:");
 		exit(EXIT_FAILURE);
-	}
 	pids = fork();
 	if (pids == -1)
-	{
-		perror("pipex: fork:");
 		exit(EXIT_FAILURE);
-	}
 	if (pids == 0)
 		child_process(av, process_fd, env);
 	else
+	{
+		waitpid(pids, &status, 0);
 		main_process(av, process_fd, env);
+	}
 	return (0);
 }

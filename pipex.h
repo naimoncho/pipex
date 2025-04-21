@@ -6,7 +6,7 @@
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:17:37 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/04/21 13:17:38 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/04/21 15:22:49 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <limits.h>
 # include <sys/uio.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 void	ft_exit(void);
 void	ft_free(char **str);
