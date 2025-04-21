@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 13:17:37 by ncheniou          #+#    #+#             */
+/*   Updated: 2025/04/21 13:17:38 by ncheniou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -10,7 +22,6 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 
-
 void	ft_exit(void);
 void	ft_free(char **str);
 int		openfd_infile(char *infile, int access);
@@ -18,7 +29,7 @@ char	*get_env(char *name, char **env);
 char	*find_exec_in_path(char **path, char *cmd_name);
 char	*get_path(char *cmd, char **env);
 void	execute_cmds(char *av, char **env);
-void	main_process(char **av,int *process_fd, char **env);
-void	child_process(char **av,int *process_fd, char **env);
+void	main_process(char **av, int *process_fd, char **env);
+void	child_process(char **av, int *process_fd, char **env);
 
 #endif

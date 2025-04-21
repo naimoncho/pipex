@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naimcheniounigomez <naimcheniounigomez@    +#+  +:+       +#+        */
+/*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:19:51 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/04/21 10:00:52 by naimcheniou      ###   ########.fr       */
+/*   Updated: 2025/04/21 13:17:42 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,24 @@ void	ft_free(char **str)
 
 int	openfd_infile(char *infile, int mode)
 {
-	int	miau;
-	
+	int	fd;
+
 	if (mode == 0)
 	{
-		miau = open(infile, O_RDONLY, 0777);
+		fd = open(infile, O_RDONLY);
 	}
 	else if (mode == 1)
 	{
-		miau = open(infile, O_WRONLY, O_CREAT, O_TRUNC, 0644);
+		fd = open(infile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	}
 	else
 		exit(EXIT_FAILURE);
-	if (miau == -1)
+	if (fd == -1)
 	{
 		perror("pipex: open");
 		exit(EXIT_FAILURE);
 	}
-	return (miau);
+	return (fd);
 }
 
 char	*get_env(char *name, char **env)
@@ -58,18 +58,18 @@ char	*get_env(char *name, char **env)
 	int		i;
 	int		j;
 	char	*sub;
-	
+
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		j = 0;
-		while(env[i][j] && env[i][j] != '=')
+		while (env[i][j] && env[i][j] != '=')
 			j ++;
 		sub = ft_substr(env[i], 0, j);
 		if (ft_strcmp(sub, name) == 0)
 		{
 			free(sub);
-			return(env[i] + j + 1);
+			return (env[i] + j + 1);
 		}
 		free(sub);
 		i ++;
@@ -82,9 +82,9 @@ char	*find_exec_in_path(char **path, char *cmd_name)
 	int		i;
 	char	*exec;
 	char	*part;
-	
+
 	i = 0;
-	while(path[i])
+	while (path[i])
 	{
 		part = ft_strjoin(path[i], "/");
 		exec = ft_strjoin(part, cmd_name);
