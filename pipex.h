@@ -6,7 +6,7 @@
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:17:37 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/04/21 15:22:49 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:02:33 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 
-void	ft_exit(void);
+char	*find_in_split_path(char *path, char *cmd);
 void	ft_free(char **str);
 int		openfd_infile(char *infile, int access);
 char	*get_env(char *name, char **env);

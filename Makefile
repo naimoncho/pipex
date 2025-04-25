@@ -7,7 +7,7 @@ SRC = pipex.c pipex_utils.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 INCLUDES = -I$(INCLUDES_DIR) -I$(LIBFT_DIR)
 
 all: $(NAME)

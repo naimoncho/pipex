@@ -6,17 +6,11 @@
 /*   By: ncheniou <ncheniou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:19:51 by ncheniou          #+#    #+#             */
-/*   Updated: 2025/04/21 13:17:42 by ncheniou         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:34:27 by ncheniou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_exit(void)
-{
-	ft_putstr_fd("Unavailable path to search", STDERR_FILENO);
-	exit (0);
-}
 
 void	ft_free(char **str)
 {
@@ -60,11 +54,15 @@ char	*get_env(char *name, char **env)
 	char	*sub;
 
 	i = 0;
+	if (!env || !name)
+		exit(EXIT_FAILURE);
 	while (env[i])
 	{
 		j = 0;
 		while (env[i][j] && env[i][j] != '=')
+		{
 			j ++;
+		}
 		sub = ft_substr(env[i], 0, j);
 		if (ft_strcmp(sub, name) == 0)
 		{
@@ -80,10 +78,14 @@ char	*get_env(char *name, char **env)
 char	*find_exec_in_path(char **path, char *cmd_name)
 {
 	int		i;
+	int		err;
 	char	*exec;
 	char	*part;
 
 	i = 0;
+	err = access(cmd_name, X_OK);
+	if (err == 0)
+		return (cmd_name);
 	while (path[i])
 	{
 		part = ft_strjoin(path[i], "/");
@@ -95,4 +97,22 @@ char	*find_exec_in_path(char **path, char *cmd_name)
 		i++;
 	}
 	return (NULL);
+}
+
+char	*find_in_split_path(char *path, char *cmd)
+{
+	char	**allpath;
+	char	*exec_path;
+	char	*result;
+
+	allpath = ft_split(path, ':');
+	if (!allpath)
+		return (NULL);
+	exec_path = find_exec_in_path(allpath, cmd);
+	if (exec_path != NULL)
+		result = ft_strdup(exec_path);
+	else
+		result = NULL;
+	ft_free(allpath);
+	return (result);
 }
